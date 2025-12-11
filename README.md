@@ -3,7 +3,6 @@
 [![GitHub](https://img.shields.io/badge/GitHub-CipherSaber%2FFOSS--CHERUB-blue)](https://github.com/CipherSaber/FOSS-CHERUB)
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-Open%20Source-green.svg)](LICENSE)
-[![Streamlit](https://img.shields.io/badge/Built%20with-Streamlit-FF4B4B.svg)](https://streamlit.io/)
 
 **FOSS-CHERUB** is an advanced, open-source vulnerability detection and security analysis platform. It combines multiple detection engines—static analysis, structural code analysis, AI inference, and dependency scanning—to provide comprehensive security assessment of source code repositories.
 
