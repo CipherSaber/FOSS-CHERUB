@@ -211,4 +211,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
+<<<<<<< HEAD
 **Built with ❤️ for the open source security community**
+=======
+**Built with ❤️ for the open source security community**
+>>>>>>> master
