@@ -1,473 +1,214 @@
-#  FOSS-CHERUB: Integrated Vulnerability Detection System
+# FOSS-CHERUB
 
-[![GitHub](https://img.shields.io/badge/GitHub-CipherSaber%2FFOSS--CHERUB-blue)](https://github.com/CipherSaber/FOSS-CHERUB)
-[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
-[![License](https://img.shields.io/badge/License-Open%20Source-green.svg)](LICENSE)
+**Multi-language Vulnerability Scanner with AI-powered Analysis**
 
-**FOSS-CHERUB** is an advanced, open-source vulnerability detection and security analysis platform. It combines multiple detection engines—static analysis, structural code analysis, AI inference, and dependency scanning—to provide comprehensive security assessment of source code repositories.
+FOSS-CHERUB is an advanced security scanning platform that combines static analysis, taint tracking, and AI-powered vulnerability classification to identify security issues across multiple programming languages.
 
-##  What is FOSS-CHERUB?
+## 🚀 Features
 
-FOSS-CHERUB stands for **Free and Open Source Software - Comprehensive Holistic Examination and Remediation Using Behavior patterns**. It's designed to:
+- **Multi-language Support**: Python, JavaScript, Java, C/C++, PHP, Go, Ruby, Rust
+- **AI-powered Analysis**: Qwen model for CWE classification and mitigation recommendations
+- **Advanced Taint Tracking**: AST-based data flow analysis for precise vulnerability detection
+- **Real-time CVE Enrichment**: Integration with NVD database for up-to-date vulnerability information
+- **Modern Web Interface**: React-based dashboard with real-time scan monitoring
+- **Comprehensive Reporting**: Detailed findings with code snippets and remediation guidance
 
-- 🔍 **Detect vulnerabilities** across multiple languages using diverse detection techniques
-- 🤖 **Leverage AI** for zero-day risk assessment and intelligent code analysis
-- 📊 **Aggregate findings** from multiple sources for high-confidence vulnerability detection
-- 💾 **Track results** with persistent database storage and history
-- 🎯 **Provide context** with code snippets, severity ranking, and remediation suggestions
+## 🛠️ Technology Stack
 
----
+- **Backend**: FastAPI, Python 3.10+
+- **Frontend**: Next.js 14, TypeScript, Tailwind CSS
+- **AI Model**: Qwen Coder (fine-tuned for security analysis)
+- **Static Analysis**: Semgrep with custom taint-mode rules
+- **Database**: PostgreSQL with CVE/CWE data
+- **Containerization**: Docker support for easy deployment
 
-## 🚀 Key Features
+## 📋 Prerequisites
 
-### Multi-Engine Detection
-| Engine | Purpose | Languages |
-|--------|---------|-----------|
-| **Semgrep** | Pattern-based static analysis | 30+ languages |
-| **Tree-sitter** | AST-based structural analysis | Python, Java, C/C++, JS, etc |
-| **AI Model** | Zero-day detection with Qwen | All supported languages |
-| **Dependency-Check** | Known vulnerability scanning | Java, .NET, Python, Ruby, etc |
+- Python 3.10 or higher
+- Node.js 18 or higher
+- Docker (optional, for database)
+- Git
 
-### Interactive Web Dashboard
-- 📱 Real-time scanning with progress tracking
-- 🔗 Git repository cloning support
-- 📤 File/archive upload (.zip, .tar, .tar.gz, .tar.bz2)
-- 🔎 Advanced filtering and search
-- 📈 Scan history and statistics
-- 🧠 AI-powered mitigation suggestions
-- 📋 Detailed finding context and code snippets
+## 🚀 Quick Start
 
-### Comprehensive Analysis
-- ✅ **Multi-source validation** - Consensus-based confidence scoring
-- ✅ **Severity ranking** - CRITICAL → INFO classification
-- ✅ **CWE/CVE mapping** - Database-backed vulnerability enrichment
-- ✅ **Zero-day assessment** - AI-based risk profiling
-- ✅ **Code context** - Surrounding code for vulnerability verification
-- ✅ **AST analysis** - Tree-sitter structural breakdown
+### 1. Clone the Repository
 
----
-
-## 📦 Quick Start
-
-### 1️⃣ Clone the Repository
 ```bash
 git clone https://github.com/CipherSaber/FOSS-CHERUB.git
 cd FOSS-CHERUB
 ```
 
-### 2️⃣ Install Dependencies
+### 2. Install Dependencies
+
+**Backend Dependencies:**
 ```bash
-cd vulnerability-detection-tool
 pip install -r requirements.txt
-pip install semgrep
 ```
 
-### 3️⃣ Launch the Dashboard
+**Frontend Dependencies:**
 ```bash
-streamlit run dashboard.py
+cd foss-cherub-ui
+npm install
+cd ..
 ```
 
-### 4️⃣ Access the Web Interface
-Open your browser and navigate to: **http://localhost:8501**
-
----
-
-## 💻 Usage Modes
-
-### Option A: Web Dashboard (Recommended)
-Perfect for interactive analysis and exploration:
+### 3. Start the Application
 
 ```bash
-streamlit run dashboard.py
+chmod +x start-all.sh
+./start-all.sh
 ```
 
-Then either:
-- 📌 **Scan a GitHub repository** - Paste URL and analyze
-- 📤 **Upload a file** - ZIP/TAR archive of your codebase
+This will:
+- Start PostgreSQL database (if Docker is available)
+- Launch the backend API on port 8082
+- Start the frontend on port 3002
 
-### Option B: Command-Line Scanner
-Perfect for CI/CD integration:
+### 4. Access the Application
 
-```python
-from foss_scanner import FOSSCHERUBScanner
+- **Web Interface**: http://localhost:3002
+- **API Documentation**: http://localhost:8082/docs
 
-db_config = {
-    "host": "localhost",
-    "port": 5432,
-    "database": "foss_cherub",
-    "user": "postgres",
-    "password": "password"
-}
+## 🔧 Manual Setup
 
-scanner = FOSSCHERUBScanner(db_config, "data_processing/merged_model")
-results = scanner.scan_path("/path/to/project")
-print(results)
+### Backend Setup
+
+```bash
+cd backend
+python api.py
 ```
 
----
+### Frontend Setup
 
-## 🎯 How It Works
-
-### The Scanning Pipeline
-
-```
-Input (Git URL or File Upload)
-           ↓
-    [Preparation Phase]
-    - Clone/Extract
-    - Clean artifacts
-           ↓
-    [Parallel Analysis Phase]
-    ├─→ Semgrep (Pattern matching)
-    ├─→ Tree-sitter (AST parsing)
-    ├─→ OWASP Dependency-Check
-    └─→ AI Model (Inference)
-           ↓
-    [Aggregation Phase]
-    - Merge findings
-    - Remove duplicates
-    - Calculate confidence
-           ↓
-    [Enrichment Phase]
-    - CWE/CVE lookup
-    - Severity ranking
-    - AI mitigation
-           ↓
-    [Storage & Display]
-    - Database save
-    - Dashboard visualization
+```bash
+cd foss-cherub-ui
+npm run dev
 ```
 
----
+### Database Setup (Optional)
 
-## 📊 Vulnerability Detection Types
+```bash
+docker run -d --name foss-cherub-db \
+  -e POSTGRES_DB=foss_cherub \
+  -e POSTGRES_USER=postgres \
+  -e POSTGRES_PASSWORD=foss_cherub_2024 \
+  -p 5432:5432 \
+  postgres:15
+```
 
-### Semgrep Detects
+## 📊 Usage
+
+### Scanning a Repository
+
+1. **Via Web Interface**:
+   - Navigate to http://localhost:3002
+   - Enter a GitHub repository URL
+   - Click "Start Scan"
+   - Monitor progress in real-time
+
+2. **Via API**:
+   ```bash
+   curl -X POST "http://localhost:8082/api/scans" \
+     -H "Content-Type: application/json" \
+     -d '{"repo_url": "https://github.com/user/repo", "scan_name": "My Scan"}'
+   ```
+
+3. **Upload Archive**:
+   - Use the web interface to upload ZIP/TAR files
+   - Supports compressed source code archives
+
+### Scan Results
+
+Results include:
+- **Vulnerability Classification**: CWE mapping with severity levels
+- **CVE Information**: Related CVE IDs and CVSS scores
+- **Code Context**: Exact file locations and code snippets
+- **Taint Analysis**: Data flow tracking for injection vulnerabilities
+- **AI Recommendations**: Automated mitigation suggestions
+
+## 🔍 Supported Vulnerability Types
+
 - SQL Injection (CWE-89)
-- Command Injection (CWE-78)
 - Cross-Site Scripting (CWE-79)
+- Command Injection (CWE-78)
+- Code Injection (CWE-95)
 - Path Traversal (CWE-22)
-- Insecure Deserialization (CWE-502)
 - Buffer Overflow (CWE-120)
-- And 1000+ additional patterns
+- Insecure Deserialization (CWE-502)
+- And many more...
 
-### Tree-sitter Identifies
-- Dangerous function calls (eval, exec, etc)
-- Unsafe library usage
-- Known vulnerability patterns
-- Security anti-patterns
-- Language-specific risky constructs
-
-### AI Zero-Day Detection
-- Novel vulnerability patterns
-- Context-aware analysis
-- Risk assessment
-- Confidence scoring
-
-### Dependency Scanning
-- Known CVE detection
-- Package vulnerability mapping
-- License compliance
-- Supply chain analysis
-
----
-
-## 🏗️ Project Structure
+## 🏗️ Architecture
 
 ```
-FOSS-CHERUB/
-├── vulnerability-detection-tool/
-│   ├── dashboard.py              # 🎨 Interactive Streamlit web UI
-│   ├── foss_scanner.py           # 🔍 Core scanning orchestrator
-│   ├── cwe_classifier.py         # 🤖 AI-based classification
-│   ├── db_connector.py           # 💾 Database integration
-│   ├── import_cve.py             # 📥 CVE data importer
-│   ├── cwec_v4.18.xml            # 📋 CWE definitions
-│   ├── database_schema.sql       # 🗄️ PostgreSQL schema
-│   ├── api/
-│   │   └── main.py               # 🔌 FastAPI backend
-│   └── data_processing/
-│       ├── merged_model/         # 🧠 Fine-tuned Qwen model
-│       └── run_qlora.py          # 📚 Model fine-tuning script
-├── dependency-check/             # 🔧 OWASP tool
-├── README.md                     # 📖 This file
-└── .gitignore                    # 📋 Git configuration
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Frontend      │    │   Backend API   │    │   AI Model      │
+│   (Next.js)     │◄──►│   (FastAPI)     │◄──►│   (Qwen)        │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+                                │
+                                ▼
+                       ┌─────────────────┐    ┌─────────────────┐
+                       │   Scanner       │    │   Database      │
+                       │   (Semgrep +    │◄──►│   (PostgreSQL)  │
+                       │    AST)         │    │                 │
+                       └─────────────────┘    └─────────────────┘
 ```
-
----
 
 ## 🔧 Configuration
 
-### Environment Setup
-```bash
-# Create .env file
-cp .env.example .env
-```
+### Environment Variables
 
-Edit `.env`:
-```env
-# Database
+```bash
+# Database Configuration
 DB_HOST=localhost
 DB_PORT=5432
 DB_NAME=foss_cherub
 DB_USER=postgres
-DB_PASSWORD=secure_password
+DB_PASSWORD=foss_cherub_2024
 
-# API
-API_ENDPOINT=http://localhost:8080
-BATCH_SIZE=8
+# API Configuration
+API_PORT=8082
+FRONTEND_PORT=3002
 
-# Model
-MODEL_PATH=data_processing/merged_model
+# Model Configuration
+MODEL_PATH=./data_processing/merged_model
 ```
 
-### Docker Setup (Recommended)
-```bash
-docker-compose up -d
-```
+### Custom Rules
 
----
+Add custom Semgrep rules in `semgrep_taint_rules.yml` for organization-specific vulnerability patterns.
 
-## 📈 Scan Results Example
+## 📈 Performance
 
-When you run a scan, you'll get results like:
-
-```
-Finding #1: [CRITICAL] SQL Injection
-├─ File: src/api/users.py:45
-├─ Severity: CRITICAL (CVSS 9.8)
-├─ CWE: CWE-89 (SQL Injection)
-├─ Detected by: Semgrep, Tree-sitter, AI (3/3 engines)
-├─ Code: cursor.execute(f'SELECT * WHERE id={user_id}')
-└─ Fix: Use parameterized queries with bind variables
-
-Finding #2: [HIGH] Insecure Deserialization
-├─ File: src/models/cache.py:67
-├─ Severity: HIGH (CVSS 7.5)
-├─ CWE: CWE-502
-├─ Detected by: AI (1/3 engines)
-├─ Code: pickle.loads(user_data)
-└─ Fix: Use json instead of pickle for untrusted data
-```
-
----
-
-## 🛠️ Requirements
-
-### System Requirements
-- **OS**: Linux, macOS, or Windows (WSL2)
-- **Python**: 3.8 or higher
-- **RAM**: 4GB minimum (8GB recommended)
-- **Disk**: 2GB for models and dependencies
-- **GPU** (optional): CUDA for faster inference
-
-### External Tools
-- **Semgrep**: `pip install semgrep`
-- **PostgreSQL**: For CVE/CWE database (optional)
-- **OWASP Dependency-Check**: Included
-
-### Python Dependencies
-```
-streamlit>=1.28.0
-pandas>=2.0.0
-requests>=2.31.0
-torch>=2.0.0
-transformers>=4.30.0
-tree-sitter>=0.20.0
-semgrep>=1.45.0
-```
-
----
-
-## 📚 Advanced Topics
-
-### Using the API
-```python
-# API endpoint for mitigations
-import requests
-
-response = requests.post(
-    "http://localhost:8080/get_mitigation",
-    json={
-        "file_content": code_content,
-        "line_number": 45,
-        "vulnerability": "SQL Injection",
-        "language": "Python"
-    },
-    timeout=120
-)
-
-mitigation = response.json()["mitigation"]
-```
-
-### Database Integration
-```python
-from db_connector import CVEDatabase
-
-db = CVEDatabase()
-stats = db.get_statistics()
-scans = db.get_scan_history(limit=10)
-```
-
-### Custom Scanning
-```python
-from foss_scanner import FOSSCHERUBScanner
-
-# Initialize with custom config
-scanner = FOSSCHERUBScanner(
-    db_config=db_config,
-    model_path="data_processing/merged_model",
-    base_path="/custom/path"
-)
-
-# Get findings
-df = scanner.scan_path("/target/repo", name="CustomScan")
-
-# Filter by severity
-critical = df[df['Severity'] == 'CRITICAL']
-print(f"Critical findings: {len(critical)}")
-```
-
----
-
-## 🔐 Security & Privacy
-
-### Safe by Design
-- ✅ No code execution during analysis
-- ✅ Sandboxed scanning environment
-- ✅ Automatic temporary file cleanup
-- ✅ Configurable data retention
-- ✅ Optional local-only processing
-- ✅ macOS artifact removal
-
-### Data Handling
-- 📊 Results stored in PostgreSQL
-- 🔒 Optional encryption at rest
-- 📜 Audit logging available
-- 🗑️ Configurable retention policies
-
----
+- **Scan Speed**: ~2-5 minutes for typical repositories
+- **Memory Usage**: ~4GB RAM (including AI model)
+- **Supported File Size**: Up to 100MB archives
+- **Concurrent Scans**: Multiple scans supported
 
 ## 🤝 Contributing
 
-We welcome contributions! Areas for enhancement:
-- 🌍 Additional language support
-- 🚀 Performance optimization
-- 🎨 UI/UX improvements
-- 📝 Documentation
-- 🧪 Test coverage
-- 🔌 Plugin system
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-See `CONTRIBUTING.md` for guidelines.
+## 📝 License
 
----
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 📋 Supported Languages
+## 🆘 Support
 
-| Language | Semgrep | Tree-sitter | AI | Deps |
-|----------|---------|-------------|-----|------|
-| Python | ✅ | ✅ | ✅ | ✅ |
-| Java | ✅ | ✅ | ✅ | ✅ |
-| JavaScript | ✅ | ✅ | ✅ | ✅ |
-| C/C++ | ✅ | ✅ | ✅ | ✅ |
-| PHP | ✅ | ❌ | ✅ | ✅ |
-| Go | ✅ | ❌ | ✅ | ✅ |
-| Ruby | ✅ | ❌ | ✅ | ✅ |
-| .NET | ✅ | ❌ | ✅ | ✅ |
-
----
-
-## 📞 Support & Documentation
-
-- **📖 Full Documentation**: See `vulnerability-detection-tool/README_COMPREHENSIVE.md`
-- **🐛 Report Issues**: [GitHub Issues](https://github.com/CipherSaber/FOSS-CHERUB/issues)
-- **💬 Discussions**: [GitHub Discussions](https://github.com/CipherSaber/FOSS-CHERUB/discussions)
-- **📧 Contact**: dev@foss-cherub.local
-
----
-
-## 📊 Performance Benchmarks
-
-Typical performance on medium-sized projects:
-
-| Metric | Time |
-|--------|------|
-| Clone repo (10MB) | 3-5 sec |
-| Semgrep scan | 10-30 sec |
-| Dependency check | 5-15 sec |
-| AI inference (100 files) | 20-40 sec |
-| Total scan time | 40-90 sec |
-
-## ⚡ Performance Tips
-
-1. **For large repositories**:
-   ```bash
-   # Reduce batch size
-   export BATCH_SIZE=2
-   ```
-
-2. **GPU acceleration**:
-   ```bash
-   # Install CUDA-enabled PyTorch
-   pip install torch --index-url https://download.pytorch.org/whl/cu118
-   ```
-
-3. **Database optimization**:
-   ```sql
-   -- Create indexes for faster queries
-   CREATE INDEX idx_findings_severity ON findings(severity);
-   CREATE INDEX idx_findings_cwe ON findings(cwe_id);
-   ```
-
----
-
-## 📄 License
-
-This project is open source under the MIT License. See LICENSE file for details.
-
----
+- **Issues**: [GitHub Issues](https://github.com/CipherSaber/FOSS-CHERUB/issues)
+- **Documentation**: [Wiki](https://github.com/CipherSaber/FOSS-CHERUB/wiki)
+- **Discussions**: [GitHub Discussions](https://github.com/CipherSaber/FOSS-CHERUB/discussions)
 
 ## 🙏 Acknowledgments
 
-**FOSS-CHERUB** is built on top of excellent open-source projects:
-
-- 🔍 [Semgrep](https://semgrep.dev/) - Static analysis engine
-- 🌳 [Tree-sitter](https://tree-sitter.github.io/) - Parser generator
-- 🤖 [Alibaba Qwen](https://qwenlm.github.io/) - Large language model
-- 🔧 [OWASP Dependency-Check](https://owasp.org/www-project-dependency-check/) - Dependency scanner
-- 🎨 [Streamlit](https://streamlit.io/) - Web framework
-- 🔌 [FastAPI](https://fastapi.tiangolo.com/) - API framework
+- [Semgrep](https://semgrep.dev/) for static analysis engine
+- [Qwen](https://github.com/QwenLM/Qwen) for AI model foundation
+- [NVD](https://nvd.nist.gov/) for vulnerability database
+- [MITRE](https://cwe.mitre.org/) for CWE classification system
 
 ---
 
-## 📈 Stats & Metrics
-
-```
-📊 Project Metrics:
-├─ Lines of Code: 5,000+
-├─ Supported Languages: 8+
-├─ Detection Patterns: 1,000+
-├─ Database Records: 100,000+ CVEs
-├─ Average Scan Time: 60 seconds
-└─ Detection Accuracy: 94%+ (vs known vulnerabilities)
-```
-
----
-
-## 🎓 Learning Resources
-
-- [CWE Top 25](https://cwe.mitre.org/top25/) - Most critical software weaknesses
-- [OWASP Top 10](https://owasp.org/www-project-top-ten/) - Web application security risks
-- [CVSS Calculator](https://www.first.org/cvss/calculator/3.1) - Vulnerability severity scoring
-- [Semgrep Rules](https://semgrep.dev/r) - Community rule repository
-
----
-
-## ⭐ Show Your Support
-
-If FOSS-CHERUB helps your security analysis, please ⭐ star this repository!
-
----
-
-
-*Last Updated: December 2024 | Version: 1.0.0*
+**Built with ❤️ for the open source security community**
