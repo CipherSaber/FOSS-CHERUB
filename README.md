@@ -172,9 +172,12 @@ FRONTEND_PORT=3002
 # Model Configuration
 MODEL_PATH=./data_processing/merged_model
 ```
+##
+### Link to the model used
+[Qwen Coder 7B](https://huggingface.co/jacpacd/Foss-Cherub-Vuln-Detector)
+##
 
 ### Custom Rules
-
 Add custom Semgrep rules in `semgrep_taint_rules.yml` for organization-specific vulnerability patterns.
 
 ## 📈 Performance
