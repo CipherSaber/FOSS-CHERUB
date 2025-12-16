@@ -210,9 +210,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [MITRE](https://cwe.mitre.org/) for CWE classification system
 
 ---
+<img width="1810" height="940" alt="Screenshot from 2025-12-13 19-45-39" src="https://github.com/user-attachments/assets/4a0c8a5b-e263-49bc-b0c3-82396e7ff759" />
+<img width="1811" height="938" alt="Screenshot from 2025-12-13 18-39-36" src="https://github.com/user-attachments/assets/0458e013-d71c-40ab-8bdc-0344174f3ff0" />
 
-<<<<<<< HEAD
-**Built with ❤️ for the open source security community**
-=======
-**Built with ❤️ for the open source security community**
->>>>>>> master
